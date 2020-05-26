@@ -1,0 +1,18 @@
+<%= form_with model:@goal do |f|%>
+    <%= f.label :title %>
+    <%= f.text_field :title%>
+    <br>
+    <br>
+    <%= f.label :description%>
+    <%= f.text_area :description%>
+    <br>
+    <br>
+    <%= f.label :due_date%>
+    <%= f.date_field :due_date%>
+    <br>
+    <br>
+    <%= f.collection_select :category_id, @categories, :id, :title%>
+    <br>
+    <br>
+    <%= f.submit%>
+<% end %>

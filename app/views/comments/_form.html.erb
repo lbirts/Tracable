@@ -1,0 +1,10 @@
+<%= form_with model:@comment do |f|%>
+    <%= f.label :content%>
+    <%= f.text_area :content%>
+    <br>
+    <br>
+    <%= f.collection_select :goal_id , @goals, :id, :title%>
+    <br>
+    <br>
+    <%= f.submit%>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  category_id: 1
+  description: MyString
+  due_date: 2020-05-26 10:38:11
+  cheers: 1
+
+two:
+  title: MyString
+  category_id: 1
+  description: MyString
+  due_date: 2020-05-26 10:38:11
+  cheers: 1

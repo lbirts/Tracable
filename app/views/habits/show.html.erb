@@ -1,0 +1,9 @@
+<h3><%= @habit.name %></h3>
+<h3>Description: </h3>
+    <%= @habit.description%>
+<h3>Goal: </h3>
+    <%= link_to @habit.goal.title, goal_path(@habit.goal)%>
+
+<%# <%= form_with url: @habit do |f|%>
+<%# <%= f.checkbox "Complete"%>
+<%# <% end %>

@@ -1,0 +1,23 @@
+<% if flash[:errors]%>
+    <% flash[:errors].each do |e| %>
+        <li style="color: red">
+            <%= e %>
+        </li>
+    <%end%>
+<%end%>
+
+<%= form_with url: signup_path do |f| %>
+    <%= f.label :username%>
+    <%= f.text_field :username %>
+    <br>
+    <br>
+    <%= f.label :password%>
+    <%= f.password_field :password%>
+    <br>
+    <br>
+    <%= f.label :password_confirmation%>
+    <%= f.password_field :password_confirmation%>
+    <br>
+    <br>
+    <%= f.submit "Create User"%>
+<% end %>

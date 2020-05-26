@@ -1,0 +1,15 @@
+<%= form_with model:@habit do |f|%>
+    <%= f.label :name %>
+    <%= f.text_field :name%>
+    <br>
+    <br>
+    <%= f.label :description%>
+    <%= f.text_area :description%>
+    <br>
+    <br>
+    <%= f.label :goal_id %>
+    <%= f.collection_select :goal_id, @goals, :id, :title%>
+    <br>
+    <br>
+    <%= f.submit%>
+<% end %>
