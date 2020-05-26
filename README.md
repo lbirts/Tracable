@@ -1,2 +1,2 @@
-# Tra-able
+# Traçable
 Goal Tracking App
