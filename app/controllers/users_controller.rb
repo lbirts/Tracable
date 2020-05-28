@@ -1,25 +1,32 @@
 class UsersController < ApplicationController
     
     skip_before_action :authenticated, only: [:new, :create]
-    before_action :current_user, only: [:edit, :update]
+    before_action :current_user, only: [:show, :edit, :update, :complete_goal]
     
     def index
         @users = User.all
-    end
-
-    def show
+        
     end
     
     def edit
     end
 
     def update
-        @user.update(user_params)
-        redirect_to @user
+        if @user.update(user_params)
+            redirect_to @user
+            @new_journal = Journal.create(entry: "You updated your account", user_id: @user.id)
+        else 
+            flash[:errors] = @user.errors.full_messages
+            redirect_to edit_user_path
+        end
     end
 
     def new
-        @user = User.new
+        if logged_in?
+            redirect_to @user
+        else
+            @user = User.new
+        end
     end
 
     def create
@@ -28,7 +35,8 @@ class UsersController < ApplicationController
         if @user.valid?
             @user.save
             session[:user_id] = @user.id
-            redirect_to "/users/#{session[:user_id]}/edit"
+            redirect_to "/users/#{@user.id}/edit"
+            @new_journal = Journal.create(entry: "You created an account", user_id: session[:user_id])
         else
             flash[:errors] = @user.errors.full_messages
             redirect_to signup_path
@@ -36,17 +44,26 @@ class UsersController < ApplicationController
     end
 
     def show
-        # if session[:user_id] == params[:id].to_i
-        #     @user = User.find(session[:user_id])
-        # else
-        #     redirect_to "/users/#{session[:user_id]}"
-        # end
+        @completed = @user.sort_due_date.completed_goals
+        @progress = @user.sort_due_date.goals_in_progress
+        @hprogress = @user.habits_in_progress
+        @featured = @user.most_likes
+        @percentage = @user.goals_percentage_done
+        if session[:user_id] == params[:id].to_i
+            @user = User.find(session[:user_id])
+        else
+            redirect_to "/users/#{session[:user_id]}"
+        end
     end
 
-    def current_user
-        if session[:user_id]
-            @user = User.find(session[:user_id])
-        end
+    def journal
+        @entries = @user.journals
+    end
+
+    def destroy
+        session.delete(:user_id)
+        @user.destroy
+        redirect_to login_path
     end
 
     private

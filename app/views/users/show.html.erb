@@ -9,23 +9,42 @@
 <h3>Email</h3>
 <%= @user.email %>
 
-<h3>Goals</h3>
-<% @user.goals.each do |goal| %>
-    <li><%= link_to goal.title, goal_path(goal)%></li>
+<h3>Featured Goal:</h3>
+<%= link_to @featured.title, goal_path(@featured)%>
+
+<h3>Progress</h3>
+    <%= @percentage%>% complete
+
+<h3>Goals In Progress</h3>
+<% @progress.each do |goal| %>
+    <li><%= link_to goal.title, goal_path(goal)%> <%= button_to "Complete", {:controller => "goals", :action => "complete_goal", :goal_id => goal.id}, method: :patch%>
+
+</li>
 <%end%>
 
-<h3>Habits</h3>
-<% @user.habits.each do |habit| %>
-    <li><%= link_to habit.name, habit_path(habit)%></li>
+<h3>Habits In Progress</h3>
+<% @hprogress.each do |habit| %>
+    <li>Goal:<%=habit.goal.title%> - <%= link_to habit.name, habit_path(habit)%> <%= button_to "Complete", {:controller => "habits", :action => "complete_habit", :habit_id => habit.id}, method: :patch%></li>
 <%end%>
 
-<h3>Comments</h3>
+<h3>Commented On</h3>
 <% @user.comments.each do |comment| %>
-    <li><%= link_to comment.content, comment_path(comment)%></li>
+    <li><%= link_to comment.goal.title, goal_path(comment.goal)%> - <%=comment.content%></li>
 <% end %>
+
+<h3>Completed Goals</h3>
+<% @completed.each do |goal| %>
+    <li><%= link_to goal.title, goal_path(goal)%> </li>
+<%end%>
 
 <br>
 <br>
 <%= form_with url: logout_path, method: "delete" do |f|%>
 <%= f.submit "Logout"%>
 <% end %>
+<br>
+<br>
+<%= form_with model:@user, method: :delete do |f|%>
+<%= f.submit "Delete"%>
+<% end %>
+

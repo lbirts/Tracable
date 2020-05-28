@@ -1,3 +1,8 @@
+<h3>Trending</h3>
+<% @trend.each do |g|%>
+    <li><%= link_to g.title, goal_path(g) %></li>
+<%end%>
+
 <h3>All Goals</h3>
 <% @goals.each do |goal|%>
     <li><%= link_to goal.title, goal_path(goal) %></li>

@@ -1,5 +1,5 @@
 <% if flash[:error]%>
-    <% flash[:error] %>
+    <li style="color: red"><%= flash[:error] %></li>
 <%end%>
 
 <%= form_with url: login_path do |f|%>

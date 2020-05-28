@@ -1,2 +1,34 @@
+<% if flash[:com]%>
+    <li style="color: red"><%= flash[:com] %></li>
+<%end%>
+<% if flash[:user]%>
+    <li style="color: red"><%= flash[:user] %></li>
+<%end%>
+
 <h3>Edit Goal</h3>
-<%= render "form"%>
+<%= form_with model:@goal do |f|%>
+    <%= f.label :title %>
+    <%= f.text_field :title%>
+    <br>
+    <br>
+    <%= f.label :description%>
+    <%= f.text_area :description%>
+    <br>
+    <br>
+    <%= f.label :due_date%>
+    <%= f.date_field :due_date%>
+    <br>
+    <br>
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, @categories, :id, :title, {include_blank: 'Select a category'}%>
+    <br>
+    <br>
+    <%= f.label :new_category %>
+    <%= f.text_field category: :id%>
+    <br>
+    <br>
+    <%= f.submit%>
+<% end %>
+
+<%= button_to "Back", url: goal_path, method: :post%>
+

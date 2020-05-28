@@ -1,3 +1,8 @@
+<h3>Most Popular</h3>
+<% @top.each do |c|%>
+    <li><%= link_to c.title, category_path(c) %></li>
+<%end%>
+
 <h3>All Goals</h3>
 <% @categories.each do |category|%>
     <li><%= link_to category.title, category_path(category) %></li>

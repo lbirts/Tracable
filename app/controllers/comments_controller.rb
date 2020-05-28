@@ -11,8 +11,15 @@ class CommentsController < ApplicationController
     end
 
     def create
-        @comment = Comment.new(comment_params.merge(user_id: session[:user_id]))
-        redirect_to @comment
+        @comment = Comment.create(comment_params.merge(user_id: session[:user_id]))
+        if @comment.save
+            redirect_to @comment.goal
+            @new_journal = Journal.create(entry: "You commented on #{@comment.goal.title} goal", user_id: session[:user_id])
+        else
+            flash[:errors] = @comment.errors.full_messages
+            redirect_to @comment.goal
+        end
+        
     end
 
     def edit
@@ -22,6 +29,7 @@ class CommentsController < ApplicationController
     def update
         @comment.update(comment_params)
         redirect_to @comment
+        @new_journal = Journal.create(entry: "You updated your comment on #{@comment.goal.title}", user_id: session[:user_id])
     end
 
     def current_comment

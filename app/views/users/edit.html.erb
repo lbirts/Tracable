@@ -1,3 +1,11 @@
+<% if flash[:errors]%>
+    <% flash[:errors].each do |e| %>
+        <li style="color: red">
+            <%= e %>
+        </li>
+    <%end%>
+<%end%>
+
 <%= form_with model:@user do |f|%>
     <%= f.label :username %>
     <%= f.text_field :username%>

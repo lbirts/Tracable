@@ -1,15 +1,52 @@
 <h3><%= @goal.title %></h3>
+<%= @goal.completed?%>
 <h3>Description: </h3>
     <%= @goal.description%>
 <h3>Cateogry: </h3>
     <%= link_to @goal.category.title, category_path(@goal.category)%>
 <h3>Due Date:</h3>
-    <%= @goal.due_date%>
+    <%= @goal.date_format%>
+    <br>
+<h3>Progress</h3>
+    <%= @percentage%>% complete
+    <%if !@goal.complete%>
+        <%= @goal.user.name %> has <%= @goal.days_left%> day(s) left! Keep up the good work. If you need to you can always changed your due date
+    <%end%>
+<h3>Habits in Progress</h3>
+    <% @progh.each do |habit|%>
+        <li><%= link_to habit.name, habit_path(habit) %></li> 
+    <% end %>
+<h3>Completed Habits</h3>
+    <% @comh.each do |habit|%>
+        <li><%= link_to habit.name, habit_path(habit) %></li> 
+    <% end %>
+<h3>Cheers </h3>
+    <%= @goal.cheers %>
 <h3>Comments</h3>
     <% @goal.comments.each do |comment|%>
         <p><strong><%= link_to comment.user.username, user_path(comment.user) %></strong> <%= comment.content%> </p> 
     <% end %>
-<h3>Cheers </h3>
-    <%= @goal.cheers %>
+<h3>Add a new comment</h3>
+<% if flash[:errors]%>
+    <% flash[:errors].each do |e| %>
+        <li style="color: red">
+            <%= e %>
+        </li>
+    <%end%>
+<%end%>
+<%= form_with model:@goal.comments.build do |f|%>
+    <%= f.hidden_field :goal_id%>
+
+    <%= f.label :content%>
+    <%= f.text_area :content%>
+    <br>
+    <br>
+    <%= f.submit "Submit Comment"%>
+<% end %>
+
+<%= button_to "Cheer", {:controller => "goals", :action => "cheer", :goal_id => @goal.id}, method: :patch%>
+
+
+
 
 

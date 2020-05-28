@@ -1,3 +1,11 @@
+<% if flash[:errors]%>
+    <% flash[:errors].each do |e| %>
+        <li style="color: red">
+            <%= e %>
+        </li>
+    <%end%>
+<%end%>
+
 <%= form_with model:@goal do |f|%>
     <%= f.label :title %>
     <%= f.text_field :title%>
@@ -11,8 +19,25 @@
     <%= f.date_field :due_date%>
     <br>
     <br>
-    <%= f.collection_select :category_id, @categories, :id, :title%>
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, @categories, :id, :title, {include_blank: 'Select a category'}%>
     <br>
     <br>
+    <%= f.label :new_category %>
+    <%= f.text_field category: :id%>
+    <br>
+    <br>
+    <%= f.label "Habits"%>
+    <br>
+    <br>
+    <%= f.fields_for :habits do |hab|%>
+        <%= hab.label :name%>
+        <%= hab.text_field :name%>
+        
+        <%= hab.label :description%>
+        <%= hab.text_field :description%>
+        <br>
+        <br>
+    <%end%>
     <%= f.submit%>
 <% end %>

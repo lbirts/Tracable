@@ -1,0 +1,74 @@
+<h1>Overall Analytics</h1>
+
+<h3>Top Category</h3>
+<%= Category.top%>
+
+<h3>Newest Category</h3>
+<%= Category.newest%>
+
+<h3>Newest Comment</h3>
+<%= Comment.newest.content%> on <%= Comment.newest.goal.title%> 
+
+<h3>Longest Comment</h3>
+<%= Comment.longest.content%> on <%= Comment.longest.goal.title%> 
+
+<h3>Percentage of Goals Done</h3>
+<%= Goal.goal_percentage_done%>%
+
+<h3>Number of Goals Done</h3>
+<%= Goal.completed_goals.count%>
+
+<h3>Goal with the most likes and comments</h3>
+<%= Goal.most_cheers_and_comments.title%>
+
+<h3>Total Comments</h3>
+<%= Goal.total_comments%>
+
+<h3>Average Comments</h3>
+<%= Goal.average_comments%>
+
+<h3>Total Cheers</h3>
+<%= Goal.total_cheers%>
+
+<h3>Average Cheers</h3>
+<%= Goal.average_cheers %>
+
+<h3>Average number of habits</h3>
+<%= Goal.average_number_of_habits%>
+
+<h3>Goals Due Soon</h3>
+<%= Goal.all_due_soon%>
+
+<h3>Goals Past Due</h3>
+<%= Goal.all_past_due%>
+
+<h3>Goals Created in May</h3>
+<%= Goal.by_month("May")%>
+
+<h3>Latest Goal Created</h3>
+<%= Goal.latest.title%>
+
+<h3>Habits Created in May</h3>
+<%= Habit.by_month("May")%>
+
+<h3>Average number of goals per user</h3>
+<%= User.average_number_of_goals%>
+
+<h3>Least Active</h3>
+<%= User.least_active.name%>
+
+<h3>Most Active</h3>
+<%= User.most_active.name%>
+
+<h3>User with most comments</h3>
+<%= Goal.top_comments.user.name%>
+
+<h3>User with most cheers</h3>
+<%= Goal.most_cheers.user.name%>
+
+<h3>User with least cheers</h3>
+<%= Goal.least_cheer.user.name%>
+
+<h3>User with least comments</h3>
+<%= Goal.least_comments.user.name%>
+
