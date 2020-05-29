@@ -1,7 +1,8 @@
 class HabitsController < ApplicationController
 
-    before_action :current_habit, only: [:show, :edit, :update]
+    before_action :current_habit, only: [:show, :edit, :update, :destroy]
     before_action :all_progress_goals_for_user, only: [:new, :edit]
+    before_action :current_user, only: [:update]
 
     def show
         # byebug
@@ -12,9 +13,14 @@ class HabitsController < ApplicationController
     end
 
     def create
-        @habit = Habit.create(habit_params)
-        redirect_to @habit
-        @new_journal = Journal.create(entry: "You created a #{@habit.name} habit", user_id: session[:user_id])
+        @habit = Habit.new(habit_params)
+        if @habit.save
+            redirect_to habit_path(@habit)
+            @new_journal = Journal.create(entry: "You created a #{@habit.name} habit", user_id: session[:user_id])
+        else 
+            flash[:errors] = @habit.errors.full_messages
+            redirect_to new_habit_path
+        end
     end
 
     def edit
@@ -22,13 +28,23 @@ class HabitsController < ApplicationController
 
     def update
         if !@habit.complete
-            @habit.update(habit_params)
-            redirect_to @habit
-            @new_journal = Journal.create(entry: "You updated a #{@habit.name} habit", user_id: session[:user_id])
+            if @habit.goal.user.id == @user.id
+                @habit.update(habit_params)
+                redirect_to @habit
+                @new_journal = Journal.create(entry: "You updated a #{@habit.name} habit", user_id: session[:user_id])
+            else
+                flash[:user] = "You do not have access to edit this habit"
+                redirect_to edit_habit_path
+            end
         else
             flash[:custom] = ("You cannot edit a completed habit")
             redirect_to edit_habit_path
         end 
+    end
+
+    def destroy
+        @habit.destroy
+        redirect_to goal_path(@habit.goal)
     end
 
     def complete_habit

@@ -1,15 +1,50 @@
-<% if flash[:error]%>
-    <li style="color: red"><%= flash[:error] %></li>
-<%end%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracable</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<%= form_with url: login_path do |f|%>
-    <%= f.label :username%>
-    <%= f.text_field :username %>
-    <br>
-    <br>
-    <%= f.label :password%>
-    <%= f.password_field :password%>
-    <br>
-    <br>
-    <%= f.submit "Login"%>
-<% end %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+     <div class="container-fluid px-3">
+      <div class="row min-vh-100">
+        <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+          <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+            <div class="mb-5">
+              <h2 class="mt-5 text-center">Welcome Back</h2>
+            </div>
+            <div>
+
+                <% if flash[:error]%>
+                    <li style="color: red"><%= flash[:error] %></li>
+                <%end%>
+
+            <%= form_with url: login_path do |f|%>
+                <%= f.label :username%>
+                <%= f.text_field :username, class: "box-color", style: "width: 520px; height: 40px;" %>
+                <br>
+                <br>
+                <%= f.label :password%>
+                <%= f.password_field :password, class: "box-color", style: "width: 520px; height: 40px;"%>
+                <br>
+                <br>
+                <%= f.submit "Login", class: "btn btn-lg btn-block btn-primary"%>
+            <% end %>
+              <hr class="my-5">
+              <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <%= link_to "Sign Up", signup_path%></small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+          <!-- Image-->
+          <div class="bg-cover h-100 mr-n3" style="background-image: url(https://www.mckinsey.com/~/media/McKinsey/Business%20Functions/McKinsey%20Digital/Our%20Insights/Setting%20an%20agenda%20for%20organic%20growth%20in%20the%20digital%20age/ambitous-growth-agenda_hero_1536x1536-758576565_b.ashx); background-size: cover;"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

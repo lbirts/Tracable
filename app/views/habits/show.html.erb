@@ -1,9 +1,23 @@
-<h3><%= @habit.name %></h3>
-<h3>Description: </h3>
-    <%= @habit.description%>
-<h3>Goal: </h3>
-    <%= link_to @habit.goal.title, goal_path(@habit.goal)%>
-
-<%# <%= form_with url: @habit do |f|%>
-<%# <%= f.checkbox "Complete"%>
-<%# <% end %>
+<section class="pt-5 move-section">
+    <div class="container move-footer">
+        <div class="col pl-lg-5">
+            <h1 class="hero-heading mb-3"><%=@habit.name%><span class="text-muted float-right"><%= link_to "Edit", edit_habit_path, class: "removelink text-dark"%></span></h1>
+            <div class="text-block">
+              <p class="text-muted"><%= @habit.description%></p>
+            </div>
+            <p><span class="nag next">Goal: </span> <span class="next"><%= link_to @habit.goal.title, goal_path(@habit.goal), class: "removelink text-dark"%></span></p>
+        </div>
+    </div>
+</section>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

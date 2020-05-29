@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
     skip_before_action :authenticated, only: [:new, :create]
     before_action :current_user, only: [:new, :journal]
     def new
+        render :layout => false
         if logged_in?
             redirect_to @user
         end

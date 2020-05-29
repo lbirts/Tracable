@@ -1,50 +1,83 @@
-<h3><%= @goal.title %></h3>
-<%= @goal.completed?%>
-<h3>Description: </h3>
-    <%= @goal.description%>
-<h3>Cateogry: </h3>
-    <%= link_to @goal.category.title, category_path(@goal.category)%>
-<h3>Due Date:</h3>
-    <%= @goal.date_format%>
-    <br>
-<h3>Progress</h3>
-    <%= @percentage%>% complete
-    <%if !@goal.complete%>
-        <%= @goal.user.name %> has <%= @goal.days_left%> day(s) left! Keep up the good work. If you need to you can always changed your due date
-    <%end%>
-<h3>Habits in Progress</h3>
-    <% @progh.each do |habit|%>
-        <li><%= link_to habit.name, habit_path(habit) %></li> 
-    <% end %>
-<h3>Completed Habits</h3>
-    <% @comh.each do |habit|%>
-        <li><%= link_to habit.name, habit_path(habit) %></li> 
-    <% end %>
-<h3>Cheers </h3>
-    <%= @goal.cheers %>
-<h3>Comments</h3>
-    <% @goal.comments.each do |comment|%>
-        <p><strong><%= link_to comment.user.username, user_path(comment.user) %></strong> <%= comment.content%> </p> 
-    <% end %>
-<h3>Add a new comment</h3>
-<% if flash[:errors]%>
-    <% flash[:errors].each do |e| %>
-        <li style="color: red">
-            <%= e %>
-        </li>
-    <%end%>
-<%end%>
-<%= form_with model:@goal.comments.build do |f|%>
-    <%= f.hidden_field :goal_id%>
 
-    <%= f.label :content%>
-    <%= f.text_area :content%>
-    <br>
-    <br>
-    <%= f.submit "Submit Comment"%>
-<% end %>
 
-<%= button_to "Cheer", {:controller => "goals", :action => "cheer", :goal_id => @goal.id}, method: :patch%>
+<section class="pt-5 move-section">
+    <div class="container">
+        <div class="col pl-lg-5">
+            <h1 class="hero-heading mb-3"><%=@goal.title%><span class="text-muted float-right"><%= link_to "Edit", edit_goal_path, class: "removelink text-dark"%></span></h1>
+            <p> <span class="badge badge-secondary"><%=@goal.completed?%></span></p>
+            <div class="text-block">
+              <p class="text-muted"><%= @goal.description%></p>
+            </div>
+            <p><span class="nag next">Category: </span> <span class="next"><%= link_to @goal.category.title, category_path(@goal.category), class: "removelink text-dark"%></span></p>
+            <p class="py-2"><span class="nag next h5">Due Date: </span> <span class="next"><%= @goal.date_format%></span></p>
+            <div class="py-2">
+                <h5 class="nag">Progress</h5>
+                <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: <%=@percentage%>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%=@percentage%>%</div>
+                </div>
+                <br>
+                <p>
+                <%if !@goal.complete%>
+                    <%= @goal.user.name %> has <%= @goal.days_left%> day(s) left! Keep up the good work!
+                <%end%>
+                </p>
+            </div>
+            <div class="text-block">
+                <h5 class="nag">Habits in progress</h5>
+                <ul class="py-3" style="list-style-type:none;">
+                <% @progh.each do |habit|%>
+                    <li><%= link_to habit.name, habit_path(habit), class: "removelink text-dark" %></li> 
+                <% end %>
+                </ul>
+            </div>
+            <div class="text-block">
+                <h5 class="nag">Habits Completed</h5>
+                <ul class="py-3" style="list-style-type:none;">
+                <% @comh.each do |habit|%>
+                    <li><%= link_to habit.name, habit_path(habit), class: "removelink text-dark" %></li> 
+                <% end %>
+                </ul>
+            </div>
+            <hr>
+            <p><span class="nag h5">Cheers:</span><span><%= @goal.cheers %></span></p>
+            <%= link_to image_tag("https://static.thenounproject.com/png/2788745-200.png"), {:controller => 'goals', :action => "cheer", :goal_id => @goal.id }, method: :patch, class: "small-icon"%>
+            <div class="text-block">
+              <p class="subtitle text-sm text-primary nag rev letter-spacing-3 pt-3 pb-2">Comments   </p>
+              <h5 class="mb-4 nag">Comments from users</h5>
+              <% @goal.comments.each do |comment|%>
+                  <div class="media-body">
+                   <p><strong><%= link_to comment.user.username, user_path(comment.user), class: "removelink" %></strong> <%= comment.content%> </p> 
+              <%end%>
+            </div>
+            <div class="py-5 center-btn">
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#leaveComment" aria-expanded="false" aria-controls="leaveComment">Leave a Comment</button>
+                <div class="collapse mt-4 center-form" id="leaveComment">
+                    <% if flash[:errors]%>
+                        <% flash[:errors].each do |e| %>
+                            <li style="color: red">
+                                <%= e %>
+                            </li>
+                        <%end%>
+                    <%end%>
+                    <%= form_with model:@goal.comments.build do  |f|%>
+                        <%= f.hidden_field :goal_id%>
+                        <%= f.label :content%>
+                        <br>
+                        <%= f.text_area :content, placeholder: "Enter your comment", cols: "52", class: "box-color"%>
+                        <br>
+                        <br>
+                        <%= f.submit "Submit Comment", class: "btn btn-primary"%>
+                    <% end %>
+                </div>
+                
+            </div>
+            <% if flash[:user]%>
+                <li style="color: red"><%= flash[:user] %></li>
+            <%end%>
+            <%= button_to "Delete", @goal, :method => :delete, class: "btn btn-danger mb-5", style: "margin-left: 446px;" %>
+        </div>
+    </div>
+</section>
 
 
 

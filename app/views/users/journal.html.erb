@@ -1,4 +1,15 @@
-<h3>All journal entries</h3>
-<% @entries.each do |e|%>
-    <%= e.entry%>
-<%end%>
+<section class="py-5 move-section">
+    <div class="container move-footer">
+        <div class="col-lg-9 pl-lg-5">
+            <h1 class="hero-heading mb-3 nag">Journal Entries</h1>
+            <div class="text-block mt-5">
+               <ul class="py-3" style="list-style-type:none;">
+                <% @entries.each do |e|%>
+                    <li class="py-2"><%= e.entry%></li>
+                    <hr>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

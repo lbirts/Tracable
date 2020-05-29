@@ -1,9 +1,19 @@
-<h3>Most Popular</h3>
-<% @top.each do |c|%>
-    <li><%= link_to c.title, category_path(c) %></li>
-<%end%>
-
-<h3>All Goals</h3>
-<% @categories.each do |category|%>
-    <li><%= link_to category.title, category_path(category) %></li>
-<% end %>
+<section class="py-5 move-section">
+    <div class="container move-footer">
+        <div class="col pl-lg-5">
+            <h1 class="hero-heading mb-3 nag">All Categories<span class="text-muted float-right"><%= link_to "New", new_category_path, class: "removelink text-dark"%></span></h1>
+            <div class="text-block">
+               <ul class="py-3" style="list-style-type:none;">
+                <% @categories.each do |category|%>
+                    <div>
+                        <span class="next"><li class="py-2"><%= link_to category.title, category_path(category) , class: "removelink text-dark" %></li></span>
+                        <% if category.most_popular?(@top)%>
+                            <span class="badge badge-secondary next">Most Popular</span>
+                        <%end%>
+                    </div>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

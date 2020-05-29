@@ -1,27 +1,41 @@
-<% if flash[:errors]%>
-    <% flash[:errors].each do |e| %>
-        <li style="color: red">
-            <%= e %>
-        </li>
-    <%end%>
-<%end%>
+<section class="py-5 move-section">
+      <div class="container move-footer">
+        <p class="subtitle text-primary">Edit your profile</p>
+        <h1 class="h2 mb-5"> Basic information <span class="text-muted float-right"><%= link_to "Back", user_path(@user), method: :get, class: "removelink text-dark"%></span></h1>
+          <div class="row">
+            <div class="m-auto">
+                    <% if flash[:errors]%>
+                        <% flash[:errors].each do |e| %>
+                            <li style="color: red">
+                                <%= e %>
+                            </li>
+                        <%end%>
+                    <%end%>
 
-<%= form_with model:@user do |f|%>
-    <%= f.label :username %>
-    <%= f.text_field :username%>
-    <br>
-    <br>
-    <%= f.label :name%>
-    <%= f.text_field :name%>
-    <br>
-    <br>
-    <%= f.label :email%>
-    <%= f.text_field :email%>
-    <br>
-    <br>
-    <%= f.label :image_url%>
-    <%= f.text_area :image_url%>
-    <br>
-    <br>
-    <%= f.submit%>
-<% end %>
+                    <%= form_with model:@user do |f|%>
+                        <%= f.label :username %>
+                        <br>
+                        <%= f.text_field :username, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                        <br>
+                        <br>
+                        <%= f.label :name%>
+                        <br>
+                        <%= f.text_field :name, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                        <br>
+                        <br>
+                        <%= f.label :email%>
+                        <br>
+                        <%= f.text_field :email, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                        <br>
+                        <br>
+                        <%= f.label :image_url%>
+                        <br>
+                        <%= f.text_area :image_url, class: "box-color", rows: "5", style: "width: 1020px"%>
+                        <br>
+                        <br>
+                        <%= f.submit class: "btn btn-primary", style: "margin-left: 450px"%>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>

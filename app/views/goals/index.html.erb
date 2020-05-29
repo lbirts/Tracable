@@ -1,9 +1,19 @@
-<h3>Trending</h3>
-<% @trend.each do |g|%>
-    <li><%= link_to g.title, goal_path(g) %></li>
-<%end%>
-
-<h3>All Goals</h3>
-<% @goals.each do |goal|%>
-    <li><%= link_to goal.title, goal_path(goal) %></li>
-<% end %>
+<section class="py-5 move-section">
+    <div class="container move-footer">
+        <div class="col-lg-9 pl-lg-5">
+            <h1 class="hero-heading mb-3 nag">All Goals</h1>
+            <div class="text-block">
+               <ul class="py-3" style="list-style-type:none;">
+                <% @goals.each do |goal|%>
+                    <div>
+                        <span class="next"><li class="py-2"><%= link_to goal.title, goal_path(goal) , class: "removelink text-dark" %></li></span>
+                        <% if goal.trending?(@trend)%>
+                            <span class="badge badge-secondary next">Trending</span>
+                        <%end%>
+                    </div>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

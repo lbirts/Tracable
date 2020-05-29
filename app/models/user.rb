@@ -92,8 +92,12 @@ class User < ApplicationRecord
     end
 
     def goals_percentage_done
-        perc = (self.completed_goals.count.to_f / self.goals.count.to_f) * 100
-        perc.round
+        if self.completed_goals.count > 0
+            perc = (self.completed_goals.count.to_f / self.goals.count.to_f) * 100
+            perc.round
+        else
+            perc = 0
+        end
     end
 
     def self.total_goals

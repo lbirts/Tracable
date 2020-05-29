@@ -18,8 +18,10 @@ class Goal < ApplicationRecord
     end
 
     def days_to_make_a_habit
-        if (due_date - Date.today).to_i < 66
-            errors.add(:due_date, ":it takes 66 days to form a habit, pick a later date")
+        if due_date
+            if (due_date - Date.today).to_i < 66
+                errors.add(:due_date, ":it takes 66 days to form a habit, pick a later date")
+            end
         end
     end
 
@@ -71,6 +73,8 @@ class Goal < ApplicationRecord
     def completed?
         if self.complete == true
             "Completed by #{self.user.username}"
+        else
+            "Created by #{self.user.username}"
         end
     end
 
@@ -94,6 +98,10 @@ class Goal < ApplicationRecord
         self.all.max_by(5) { |g|
             g.cheers
         }
+    end
+
+    def trending?(arr)
+       arr.include?(self)
     end
 
     def self.most_cheers

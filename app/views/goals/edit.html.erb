@@ -1,34 +1,39 @@
-<% if flash[:com]%>
-    <li style="color: red"><%= flash[:com] %></li>
-<%end%>
-<% if flash[:user]%>
-    <li style="color: red"><%= flash[:user] %></li>
-<%end%>
-
-<h3>Edit Goal</h3>
-<%= form_with model:@goal do |f|%>
-    <%= f.label :title %>
-    <%= f.text_field :title%>
-    <br>
-    <br>
-    <%= f.label :description%>
-    <%= f.text_area :description%>
-    <br>
-    <br>
-    <%= f.label :due_date%>
-    <%= f.date_field :due_date%>
-    <br>
-    <br>
-    <%= f.label :category %>
-    <%= f.collection_select :category_id, @categories, :id, :title, {include_blank: 'Select a category'}%>
-    <br>
-    <br>
-    <%= f.label :new_category %>
-    <%= f.text_field category: :id%>
-    <br>
-    <br>
-    <%= f.submit%>
-<% end %>
-
-<%= button_to "Back", url: goal_path, method: :post%>
-
+<section class="py-5 move-section">
+      <div class="container move-footer">
+        <p class="subtitle text-primary">Add new goal</p>
+        <h1 class="h2 mb-5"> Basic information <span class="text-muted float-right"><%= link_to "Back", goal_path(@goal), method: :get, class: "removelink text-dark"%></span></h1>
+          <div class="row">
+            <div class="m-auto">
+                    <% if flash[:com]%>
+                        <li style="color: red"><%= flash[:com] %></li>
+                    <%end%>
+                    <% if flash[:user]%>
+                        <li style="color: red"><%= flash[:user] %></li>
+                    <%end%>
+                    <%= form_with model:@goal do |f|%>
+                        <%= f.label :title %>
+                        <br>
+                        <%= f.text_field :title, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                        <br>
+                        <br>
+                        <%= f.label :description%>
+                        <br>
+                        <%= f.text_area :description, class: "box-color", rows: "5", style: "width: 1020px"%>
+                        <br>
+                        <br>
+                        <%= f.label :due_date%>
+                        <br>
+                        <%= f.date_field :due_date, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                        <br>
+                        <br>
+                        <%= f.label :category %>
+                        <br>
+                        <%= f.collection_select :category_id, @categories, :id, :title, {include_blank: 'Select a category'}, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                        <br>
+                        <br>
+                        <%= f.submit class: "btn btn-primary", style: "margin-left: 450px"%>
+                    <% end %>   
+                </div>
+            </div>
+        </div>
+    </section>

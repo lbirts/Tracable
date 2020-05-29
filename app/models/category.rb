@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
     has_many :goals
-    validates :title, presence: true, uniqueness: true
+    # validates :title, presence: true, uniqueness: true
 
     def self.most_popular
         self.all.max_by(3) { |c|
@@ -13,6 +13,10 @@ class Category < ApplicationRecord
             c.goals.length
         }.title
     end
+
+    def most_popular?(arr)
+        arr.include?(self)
+     end
 
     def self.newest
         self.all.sort {|a,b|

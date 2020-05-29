@@ -1,11 +1,25 @@
-<h3>Category:</h3>
-<%= @category.title%>
-
-<% if @featured%>
-    <h3>Featured Goal:</h3>
-    <%= link_to @featured.title, goal_path(@featured)%>
-<%end%>
-<h3>Goals:</h3>
-<% @category.goals.each do |goal|%>
-    <li><%= link_to goal.title, goal_path(goal)%></li>
-<%end%>
+<section class="py-5 move-section">
+    <div class="container move-footer">
+        <div class="col pl-lg-5">
+            <h1 class="hero-heading mb-3 nag"><%= @category.title%><span class="text-muted float-right"><%= link_to "Edit", edit_category_path, class: "removelink text-dark"%></span></h1>
+            <% if @featured%>
+                <h5 class="nag mt-5">Featured Goal</h5>
+                <%= link_to @featured.title, goal_path(@featured)%>
+            <%end%> 
+            <div class="text-block mt-5">
+            <h5 class="nag">All Goals</h5>
+               <ul class="py-3" style="list-style-type:none;">
+                <% @category.goals.each do |goal|%>
+                    <li class="py-2"><%= link_to goal.title, goal_path(goal) , class: "removelink text-dark" %></li>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

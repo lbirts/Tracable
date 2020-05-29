@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     helper_method :current_user, :logged_in?
     before_action :authenticated
+    skip_before_action :authenticated, only: [:home]
 
     def current_user
         if session[:user_id]
@@ -14,5 +15,8 @@ class ApplicationController < ActionController::Base
 
     def authenticated
         redirect_to login_path unless logged_in?
+    end
+
+    def home
     end
 end

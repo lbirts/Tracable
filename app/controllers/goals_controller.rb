@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
-    before_action :current_goal, only: [:show, :edit, :update, :cheer]
-    before_action :current_user, only: [:create, :update]
+    before_action :current_goal, only: [:show, :edit, :update, :cheer, :destroy]
+    before_action :current_user, only: [:create, :update, :destroy]
     before_action :all_categories, only: [:new, :edit]
 
     def index
@@ -24,9 +24,10 @@ class GoalsController < ApplicationController
     end
 
     def create
+        byebug
         @goal = Goal.new(goal_params.merge(user_id: @user.id))
-        if !params[:goal]["{:category=>:id}"].blank?
-            new_category = Category.create(title: params[:goal]["{:category=>:id}"])
+        if !params[:goal][:id_category].blank?
+            new_category = Category.create(title: params[:goal][:id_category])
             @goal.category_id = new_category.id
             @new_journal = Journal.create(entry: "You created the #{new_category.title} category", user_id: session[:user_id])
         end
@@ -57,6 +58,16 @@ class GoalsController < ApplicationController
             flash[:com] = "You cannot edit a completed goal"
             redirect_to edit_goal_path
         end 
+    end
+
+    def destroy
+        if @goal.user_id == @user.id
+            @goal.destroy
+            redirect_to user_path(@user)
+        else
+            flash[:user] = "You do not have access to delete this goal"
+            redirect_to goal_path
+        end
     end
     
     def cheer

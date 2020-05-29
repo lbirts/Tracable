@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root :to => 'application#home'
+
   resources :comments
   resources :analytics, only: [:index]
   resources :habits do

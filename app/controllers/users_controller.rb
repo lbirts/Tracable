@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     end
 
     def new
+        render :layout => false
         if logged_in?
             redirect_to @user
         else

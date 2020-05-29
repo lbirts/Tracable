@@ -1,2 +1,43 @@
 <h3>New Habit</h3>
-<%= render "form"%>
+<section class="py-5 move-section">
+      <div class="container move-footer">
+        <p class="subtitle text-primary">Add a new habit</p>
+        <h1 class="h2 mb-5"> Basic information </h1>
+          <div class="row">
+            <div class="m-auto">
+                <% if flash[:errors]%>
+                    <% flash[:errors].each do |e| %>
+                        <li style="color: red">
+                            <%= e %>
+                        </li>
+                    <%end%>
+                <%end%>
+
+                <% if flash[:com]%>
+                    <li style="color: red"><%= flash[:com] %></li>
+                <%end%>
+                <% if flash[:user]%>
+                    <li style="color: red"><%= flash[:user] %></li>
+                <%end%>
+
+
+                <%= form_with model:@habit do |f|%>
+                    <%= f.label :name %>
+                    <br>
+                    <%= f.text_field :name, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                    <br>
+                    <br>
+                    <%= f.label :description%>
+                    <br>
+                    <%= f.text_area :description, class: "box-color", rows: "5", style: "width: 1020px"%>
+                    <br>
+                    <br>
+                    <%= f.collection_select :goal_id, @goals, :id, :title, {include_blank: 'Select a category'}, class: "box-color", style: "width: 1020px; height: 37px;"%>
+                    <br>
+                    <br>
+                    <%= f.submit class: "btn btn-primary", style: "margin-left: 450px"%>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
