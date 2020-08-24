@@ -12,14 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2020_05_28_075740) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
-    t.string "title"
+    t.text "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "content"
+    t.text "content"
     t.integer "goal_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -27,9 +30,9 @@ ActiveRecord::Schema.define(version: 2020_05_28_075740) do
   end
 
   create_table "goals", force: :cascade do |t|
-    t.string "title"
+    t.text "title"
     t.integer "category_id"
-    t.string "description"
+    t.text "description"
     t.date "due_date"
     t.integer "cheers", default: 0
     t.integer "user_id"
@@ -39,8 +42,8 @@ ActiveRecord::Schema.define(version: 2020_05_28_075740) do
   end
 
   create_table "habits", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
+    t.text "name"
+    t.text "description"
     t.integer "goal_id"
     t.boolean "complete", default: false
     t.datetime "created_at", precision: 6, null: false
@@ -48,18 +51,18 @@ ActiveRecord::Schema.define(version: 2020_05_28_075740) do
   end
 
   create_table "journals", force: :cascade do |t|
-    t.string "entry"
+    t.text "entry"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
-    t.string "image_url"
+    t.text "username"
+    t.text "name"
+    t.text "email"
+    t.text "password_digest"
+    t.text "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
