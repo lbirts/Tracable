@@ -24,7 +24,6 @@ class GoalsController < ApplicationController
     end
 
     def create
-        byebug
         @goal = Goal.new(goal_params.merge(user_id: @user.id))
         if !params[:goal][:id_category].blank?
             new_category = Category.create(title: params[:goal][:id_category])

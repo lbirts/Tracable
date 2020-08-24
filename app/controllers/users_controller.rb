@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(auth_params)
+        byebug
         
         if @user.valid?
             @user.save

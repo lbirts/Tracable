@@ -25,7 +25,7 @@ Tell people where they can go to for help. It can be any combination of an issue
 ### Things to improve upon:
  - Follow users
  - Add a betting feature
-
+ - Implement active record
 
 ## Authors and acknowledgment
 Built by Lauren Birts and Karim Macknojia, Flatiron Software Engineering Houston 04/20/2020
