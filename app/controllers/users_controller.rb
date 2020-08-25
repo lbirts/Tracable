@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     end
 
     def new
-        render :layout => false
+        render :layout => 'nofoothead'
         if logged_in?
             redirect_to @user
         else
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(auth_params)
-        byebug
+        # byebug
         
         if @user.valid?
             @user.save

@@ -11,8 +11,8 @@ Goal.destroy_all
 Habit.destroy_all
 Comment.destroy_all
 
-u1 = User.create(name: 'Lauren', username: 'lbirts', email: 'laurentest@aol.com', password: 'iLovepuppies12', image_url: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231413/Labrador-Retriever-MP.jpg" )
-u2 = User.create(name: 'Karim', username: 'karim12', email: 'karimtest@aol.com', password: 'iLovecats21', image_url: "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" )
+u1 = User.create(name: 'Lauren', username: 'lbirts', email: 'laurentest@aol.com', password: 'iLovepuppies12!', image_url: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231413/Labrador-Retriever-MP.jpg" )
+u2 = User.create(name: 'Karim', username: 'karim12', email: 'karimtest@aol.com', password: 'iLovecats21!', image_url: "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" )
 
 c1 = Category.create(title: "Education")
 c2 = Category.create(title: "Technology")

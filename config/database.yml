@@ -17,7 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: Habitual-Goal
+  database: Habitual-Dev
   pool: 5
   username: lbirts
   password:
@@ -47,7 +47,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: Habitual-Goal
+  database: Habitual-Test
   pool: 5
   username: lbirts
   password:
