@@ -14,7 +14,7 @@ Download or clone the repository. Run 'bundle install' to install the required g
 
 ## Video demo of the game: 
 
-
+habitual-goal.herokuapp.com
 
 ## Support
 
