@@ -12,7 +12,7 @@ Habitual: A user can create an account. Once logged in, a user will be able to c
 
 Download or clone the repository. Run 'bundle install' to install the required gems. Run 'rails s' to get your server running and go to "http://localhost:3000".
 
-## Video demo of the game: 
+## Demo 
 
 https://habitual-goal.herokuapp.com
 
